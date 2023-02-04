@@ -33,6 +33,9 @@ html {
   --border-color: #8e8f99;
   --hover-color-icons: #31d0aa;
   --background-color-footer: rgba(255, 255, 255, 0.1);
+  --backdrop-color: rgba(46, 47, 66, 0.4);
+  --modal-color: #fcfcfc;
+  --modal-button: #e7e9fc;
 
   /* Others */
 
@@ -114,7 +117,9 @@ ul {
 .list {
   list-style-type: none;
 }
-
+.site-nav-item {
+  position: relative;
+}
 .header-link {
   padding-top: 24px;
   padding-bottom: 24px;
@@ -124,6 +129,29 @@ ul {
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.02em;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-portfolio::after {
+  bottom: 0px;
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--hover-color);
+  border-radius: 2px;
+}
+.link-studio::after {
+  bottom: 0px;
+  position: absolute;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--hover-color);
+  border-radius: 2px;
 }
 
 .header-link:hover,
@@ -158,6 +186,9 @@ ul {
   text-decoration: none;
   padding-top: 24px;
   padding-bottom: 24px;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .adress-link:hover,
@@ -206,10 +237,13 @@ ul {
   cursor: pointer;
   border: none;
   border-radius: 4px;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button:hover,
 .button:focus {
-  background: var(--button-color);
+  background-color: var(--button-color);
 }
 
 /* Main section */
@@ -345,6 +379,9 @@ ul {
   height: 40px;
   background-color: var(--accent-color);
   border-radius: 50%;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icon {
   fill: currentColor;
@@ -369,6 +406,9 @@ ul {
   border: 1px solid var(--border-color);
   border-radius: 4px;
   fill: var(--border-color);
+  transition-property: border, fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-icon {
@@ -430,6 +470,9 @@ ul {
   height: 40px;
   border-radius: 50%;
   background-color: var(--background-color-footer);
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .socials-link-footer:hover,
@@ -459,12 +502,15 @@ ul {
   padding-left: 24px;
   border: 1px solid var(--footer-color);
   border-radius: 4px;
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Hover/focus */
 .btn:focus,
 .btn:hover {
-  background: var(--hover-color);
+  background-color: var(--hover-color);
   color: var(--white-color);
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
@@ -499,6 +545,9 @@ ul {
 .card-link {
   text-decoration: none;
   color: currentColor;
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-link:hover,
 .card-link:focus {
@@ -506,6 +555,34 @@ ul {
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
   display: block;
 }
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+}
+.overlay-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate(0, 100%);
+  background-color: var(--accent-color);
+  color: var(--color-light);
+  line-height: 1.5;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  padding-left: 32px;
+  padding-top: 40px;
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-link:hover .overlay-card,
+.card-link:focus .overlay-card {
+  transform: translate(0, 0);
+}
+
 /* Footer */
 .footer-section {
   background-color: var(--backgroind-color);
@@ -529,4 +606,44 @@ ul {
   letter-spacing: 0.02em;
   color: var(--footer-color);
   width: 264px;
+}
+
+/* Modal icon */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop-color);
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--modal-color);
+  width: 408px;
+  height: 576px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.modal-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  padding: 0;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--modal-button);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
 }
